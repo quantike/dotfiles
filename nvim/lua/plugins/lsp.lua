@@ -17,6 +17,7 @@ return {
 					"rust_analyzer",
 					"pyright",
 					"zls",
+					"yamlls",
 				},
 			})
 		end,
@@ -59,6 +60,16 @@ return {
 			lspconfig.zls.setup({
 				capabilities = capabilities,
 				cmd = { "zls" },
+			})
+			lspconfig.yamlls.setup({
+				capabilities = capabilities,
+				settings = {
+					yaml = {
+						schemas = {
+							["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*"
+						}
+					}
+				}
 			})
 		end,
 	},
