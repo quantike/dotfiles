@@ -88,3 +88,4 @@ cask "font-fira-mono"
 cask "font-fira-mono-nerd-font"
 # Replacement for Docker Desktop
 cask "orbstack"
+go "github.com/google/yamlfmt/cmd/yamlfmt"
