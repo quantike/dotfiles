@@ -32,12 +32,21 @@ return {
 		},
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			local lspconfig = require("lspconfig")
 
-			lspconfig.bashls.setup({
+			-- bashls
+			vim.lsp.config.bashls = {
+				cmd = { "bash-language-server", "start" },
+				filetypes = { "sh" },
+				root_markers = { ".git" },
 				capabilities = capabilities,
-			})
-			lspconfig.lua_ls.setup({
+			}
+			vim.lsp.enable("bashls")
+
+			-- lua_ls
+			vim.lsp.config.lua_ls = {
+				cmd = { "lua-language-server" },
+				filetypes = { "lua" },
+				root_markers = { ".git", ".luarc.json", ".luarc.jsonc", ".luacheckrc" },
 				capabilities = capabilities,
 				settings = {
 					Lua = {
@@ -52,15 +61,35 @@ return {
 						},
 					},
 				},
-			})
-			lspconfig.pyright.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.zls.setup({
-				capabilities = capabilities,
+			}
+			vim.lsp.enable("lua_ls")
+
+            -- Optional: Only required if you need to update the language server settings
+            vim.lsp.config('ty', {
+              settings = {
+                ty = {
+                  -- ty language server settings go here
+                }
+              }
+            })
+
+            -- Required: Enable the language server
+            vim.lsp.enable('ty')
+
+			-- zls
+			vim.lsp.config.zls = {
 				cmd = { "zls" },
-			})
-			lspconfig.yamlls.setup({
+				filetypes = { "zig", "zir" },
+				root_markers = { "build.zig", ".git" },
+				capabilities = capabilities,
+			}
+			vim.lsp.enable("zls")
+
+			-- yamlls
+			vim.lsp.config.yamlls = {
+				cmd = { "yaml-language-server", "--stdio" },
+				filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab" },
+				root_markers = { ".git" },
 				capabilities = capabilities,
 				settings = {
 					yaml = {
@@ -69,7 +98,8 @@ return {
 						}
 					}
 				}
-			})
+			}
+			vim.lsp.enable("yamlls")
 		end,
 	},
 }
