@@ -1,4 +1,5 @@
 tap "hashicorp/tap"
+tap "nats-io/nats-tools"
 tap "seatedro/glimpse"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
@@ -38,20 +39,32 @@ brew "hyperfine"
 brew "jq"
 # Kubernetes CLI To Manage Your Clusters In Style!
 brew "k9s"
+# Package manager for the Lua programming language
+brew "luarocks"
 # Media player based on MPlayer and mplayer2
 brew "mpv"
+# Lightweight cloud messaging system
+brew "nats-server"
 # Fast, highly customisable system info script
 brew "neofetch"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
-# Platform built on V8 to build network applications
+# Open-source, cross-platform JavaScript runtime environment
 brew "node@20"
+# Object-relational database system
+brew "postgresql@14", link: false
+# Object-relational database system
+brew "postgresql@16", restart_service: :changed, link: true
 # Framework for managing multi-language pre-commit hooks
 brew "pre-commit"
+# Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
+brew "prettier"
 # Protocol buffers (Google's data interchange format)
 brew "protobuf"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Fast and accurate code counter with complexity and COCOMO estimates
+brew "scc"
 # Autoformat shell script source code
 brew "shfmt"
 # Programmatically correct mistyped console commands
@@ -78,6 +91,8 @@ brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 # Terraform
 brew "hashicorp/tap/terraform"
+# NATS utility
+brew "nats-io/nats-tools/nats"
 # Blazingly fast tool for peeking at codebases
 brew "seatedro/glimpse/glimpse"
 # Command-line interface for 1Password
