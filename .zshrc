@@ -236,3 +236,6 @@ eval "$(zoxide init zsh)"
 
 # duckdb
 export PATH='/Users/ike/.duckdb/cli/latest':$PATH
+
+# postgresql
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
