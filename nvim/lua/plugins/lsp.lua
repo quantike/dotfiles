@@ -14,7 +14,6 @@ return {
 				ensure_installed = {
 					"bashls",
 					"lua_ls",
-					"pyright",
 					"zls",
 					"yamlls",
 				},
