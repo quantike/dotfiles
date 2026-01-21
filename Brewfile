@@ -15,6 +15,8 @@ brew "difftastic"
 brew "direnv"
 # Embeddable SQL OLAP Database Management System
 brew "duckdb"
+# Modern, maintained replacement for ls
+brew "eza"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # Command-line fuzzy finder written in Go
@@ -61,6 +63,8 @@ brew "pre-commit"
 brew "prettier"
 # Protocol buffers (Google's data interchange format)
 brew "protobuf"
+# Monitor data's progress through a pipe
+brew "pv"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Fast and accurate code counter with complexity and COCOMO estimates
@@ -104,3 +108,13 @@ cask "font-fira-mono-nerd-font"
 # Replacement for Docker Desktop
 cask "orbstack"
 go "github.com/google/yamlfmt/cmd/yamlfmt"
+cargo "cargo-audit"
+cargo "cargo-deny"
+cargo "cargo-machete"
+cargo "cargo-msrv"
+cargo "cargo-tarpaulin"
+cargo "cargo-udeps"
+cargo "reporeport"
+cargo "sqlx-cli"
+cargo "ulid-cli"
+cargo "zoxide"

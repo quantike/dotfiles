@@ -45,3 +45,9 @@ vim.keymap.set("n", "<leader>K", vim.lsp.buf.hover)
 
 vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename)
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
+
+-- lsp diagnostics
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)

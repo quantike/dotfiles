@@ -185,7 +185,7 @@ function profile() {
 
     # pick a profile via fzf
     local choice 
-    choice=$(aws configure list-profiles | fzf --prompt "Choose active AWS profile:") || return
+    choice=$(aws configure list-profiles | sort | fzf --prompt "Choose active AWS profile:") || return
     export AWS_PROFILE="${choice:-default}"
 
     # propogate any custom env_name
@@ -239,3 +239,9 @@ export PATH='/Users/ike/.duckdb/cli/latest':$PATH
 
 # postgresql
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+
+# terraform -> tf 
+alias tf='terraform'
+
+# nvim -> vim 
+alias vim='nvim'
