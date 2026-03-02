@@ -51,3 +51,16 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+
+-- lsp log management
+-- Clears the LSP log file (useful due to terraform-ls stderr bug: https://github.com/hashicorp/terraform-ls/issues/1271)
+vim.api.nvim_create_user_command('LspLogNuke', function()
+    local log_path = vim.lsp.get_log_path()
+    local file = io.open(log_path, 'w')
+    if file then
+        file:close()
+        vim.notify('Nuked LSP log: ' .. log_path, vim.log.levels.INFO)
+    else
+        vim.notify('Failed to nuke LSP log: ' .. log_path, vim.log.levels.ERROR)
+    end
+end, { desc = 'Clear the LSP log file' })

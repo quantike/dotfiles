@@ -39,6 +39,8 @@ brew "htop"
 brew "hyperfine"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Handy way to save and run project-specific commands
+brew "just"
 # Kubernetes CLI To Manage Your Clusters In Style!
 brew "k9s"
 # Package manager for the Lua programming language
@@ -71,6 +73,8 @@ brew "ripgrep"
 brew "scc"
 # Autoformat shell script source code
 brew "shfmt"
+# SQL linter and auto-formatter for Humans
+brew "sqlfluff"
 # Programmatically correct mistyped console commands
 brew "thefuck"
 # Terminal multiplexer
@@ -105,6 +109,8 @@ cask "1password-cli"
 cask "dotnet-sdk"
 cask "font-fira-mono"
 cask "font-fira-mono-nerd-font"
+# GPU-based terminal emulator
+cask "kitty"
 # Replacement for Docker Desktop
 cask "orbstack"
 go "github.com/google/yamlfmt/cmd/yamlfmt"
@@ -116,5 +122,6 @@ cargo "cargo-tarpaulin"
 cargo "cargo-udeps"
 cargo "reporeport"
 cargo "sqlx-cli"
+cargo "tansu"
 cargo "ulid-cli"
 cargo "zoxide"
