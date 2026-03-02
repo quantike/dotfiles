@@ -3,7 +3,16 @@ repos:
     hooks:
       - id: brew-bundle-dump
         name: Update Brewfile
-        entry: brew bundle dump --force --describe
+        entry: >-
+          bash -c '
+            tmp=$(mktemp) &&
+            brew bundle dump --force --file="$tmp" &&
+            if ! diff -q "$tmp" Brewfile > /dev/null 2>&1; then
+              mv "$tmp" Brewfile;
+            else
+              rm -f "$tmp";
+            fi
+          '
         language: system
         files: ^Brewfile$
         pass_filenames: false
