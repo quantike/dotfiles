@@ -172,58 +172,19 @@ export FZF_DEFAULT_OPTS='
   --color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598,marker:#fe8019,header:#665c54
 '
 
-# AWS profile switcher with SSO login by default
-function profile() {
-    # check that there is a config file
-    local aws_config_file="$HOME/.aws/config"
-    
-    # ensure AWS config exists
-    if [[ ! -f "$aws_config_file" ]]; then 
-        echo "AWS config file not found at $aws_config_file"
-        return 1
-    fi
-
-    # pick a profile via fzf
-    local choice 
-    choice=$(aws configure list-profiles | sort | fzf --prompt "Choose active AWS profile:") || return
-    export AWS_PROFILE="${choice:-default}"
-
-    # propogate any custom env_name
-    local env_name
-    env_name=$(aws configure get env_name --profile "$AWS_PROFILE")
-    export ENV_NAME="$env_name"
-
-    # if a user asked to skip a login
-    if [[ "$1" == "--no-login" || "$1" == "-n" ]]; then
-        echo "Skipping SSO login for profile: $AWS_PROFILE"
-        return
-    fi
-
-    # check whether credentials are still valid
-    if aws sts get-caller-identity --profile "$AWS_PROFILE" >/dev/null 2>&1; then
-        echo "AWS credentials valid for profile: $AWS_PROFILE"
-    else 
-        echo "Logging in to AWS SSO for profile: $AWS_PROFILE"
-        aws sso login --profile "$AWS_PROFILE"
-    fi
-}
 
 # usage: 
 #   profile             -> switch profile and login via SSO
 #   profile --no-login  -> switch profile only
 #           -n 
 
-# prompt (optional): show current AWS env and profile at the right
-#   uses oh-my-zsh btw
-function aws_prof {
-  # don’t show for default or unset
-  [[ -z "$AWS_PROFILE" || "$AWS_PROFILE" == default ]] && return
-
-  local env="${ENV_NAME:-none}"
-  echo "%{$fg_bold[blue]%}aws:(%{$fg[yellow]%}${AWS_PROFILE}@${env}%{$fg_bold[blue]%})"
+# prompt: show current AWS env_name in the left prompt when a profile with one is active
+function aws_env_prompt {
+  [[ -z "$ENV_NAME" ]] && return
+  echo " as ${hotpink}${ENV_NAME}%{$reset_color%}"
 }
 
-RPROMPT='$(aws_prof)'
+PROMPT='${purple}%n%{$reset_color%} in ${limegreen}%~%{$reset_color%}$(virtualenv_prompt_info)$(ruby_prompt_info)$(aws_env_prompt)$vcs_info_msg_0_${orange} λ%{$reset_color%} '
 
 # Alias to activate a venv
 alias activate="source .venv/bin/activate"
