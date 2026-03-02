@@ -1,5 +1,6 @@
 # dotfiles
-Ike's dotfiles. 
+
+Ike's dotfiles.
 
 ## Getting started
 
@@ -24,9 +25,7 @@ sh bootstrap-nvim.sh
 
 Then when you first run `nvim` it should bootstrap lazy.nvim install and set up everything.
 
-## TODO List
+## Developing
 
-- [x] AWS Account switching
-- [x] AWS Account shell prompt
-- [ ] Direnv config not tracked
-- [ ] Make AWS Account shell prompt prettier
+I use `prek` so be sure to install it first. Then use `prek install` to use the pre-commit hooks.
+
