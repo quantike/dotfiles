@@ -206,3 +206,9 @@ alias tf='terraform'
 
 # nvim -> vim 
 alias vim='nvim'
+
+# stop typing 'clear' please
+clear() {
+    echo "Use 'Ctrl+L' to clear the screen"
+    return 1
+}
