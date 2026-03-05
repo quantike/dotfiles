@@ -3,17 +3,20 @@ function profile() {
     # parse flags upfront
     local do_logout=false
     local no_login=false
+    local do_relogin=false
 
     for arg in "$@"; do
         case "$arg" in
             --logout|-l)   do_logout=true ;;
             --no-login|-n) no_login=true ;;
+            --relogin|-r)  do_relogin=true ;;
             --help|-h)
                 echo "Usage: profile [options]"
                 echo ""
                 echo "Options:"
                 echo "  -l, --logout     Log out of the current AWS SSO profile and unset env vars"
                 echo "  -n, --no-login   Switch profile without triggering SSO login"
+                echo "  -r, --relogin    Re-login to the current AWS SSO profile without switching"
                 echo "  -h, --help       Show this help message"
                 return 0
                 ;;
@@ -24,6 +27,17 @@ function profile() {
                 ;;
         esac
     done
+
+    # handle relogin
+    if $do_relogin; then
+        if [[ -z "$AWS_PROFILE" ]]; then
+            echo "No active AWS profile to re-login to"
+            return 1
+        fi
+        echo "Logging in to AWS SSO for profile: $AWS_PROFILE"
+        aws sso login --profile "$AWS_PROFILE"
+        return 0
+    fi
 
     # handle logout
     if $do_logout; then
