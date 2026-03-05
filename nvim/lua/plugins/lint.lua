@@ -7,7 +7,10 @@ return {
 
 		vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 			callback = function()
-				require("lint").try_lint()
+				local filepath = vim.fn.expand("%:p")
+				if filepath:match("%.github/workflows/") then
+					require("lint").try_lint()
+				end
 			end,
 		})
 	end,
