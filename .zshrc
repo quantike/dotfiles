@@ -212,3 +212,7 @@ clear() {
     echo "Use 'Ctrl+L' to clear the screen"
     return 1
 }
+
+httpcat() {
+  kitten icat "https://http.cat/$1.jpg"
+}
