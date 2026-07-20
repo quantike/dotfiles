@@ -77,6 +77,16 @@ else
 	echo "⚠️  Warning: No Brewfile found at $BREWFILE. Skipping brew bundle."
 fi
 
+# Symlink ~/.config/k9s to dotfiles
+K9S_TARGET="$HOME/.config/k9s"
+K9S_SOURCE="$HOME/.dotfiles/k9s"
+if [ -e "$K9S_TARGET" ] && [ ! -L "$K9S_TARGET" ]; then
+	echo "→ Backing up existing ~/.config/k9s to ~/.config/k9s.backup"
+	mv "$K9S_TARGET" "$K9S_TARGET.backup"
+fi
+echo "→ Creating symlink: $K9S_TARGET → $K9S_SOURCE"
+ln -fsn "$K9S_SOURCE" "$K9S_TARGET"
+
 # Create a projects directories
 echo "→ Ensuring ~/Developer exists…"
 mkdir -p "$HOME/Developer"

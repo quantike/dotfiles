@@ -76,6 +76,9 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+# Load local secrets (not tracked in dotfiles), e.g. GITHUB_TOKEN for Yarn/GitHub Packages
+[ -f "$HOME/.secrets/github.env" ] && source "$HOME/.secrets/github.env"
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -216,3 +219,10 @@ clear() {
 httpcat() {
   kitten icat "https://http.cat/$1.jpg"
 }
+
+# bun completions
+[ -s "/Users/ike/.bun/_bun" ] && source "/Users/ike/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

@@ -1,3 +1,7 @@
 background-opacity = 0.9
 theme = Gruvbox Dark
 font-size = 16
+working-directory = inherit
+window-inherit-working-directory = true
+tab-inherit-working-directory = true
+split-inherit-working-directory = true
