@@ -52,6 +52,8 @@ brew "jq"
 brew "just"
 # Kubernetes CLI To Manage Your Clusters In Style!
 brew "k9s"
+# Implementation of the file(1) command
+brew "libmagic"
 # Package manager for the Lua programming language
 brew "luarocks"
 # Media player based on MPlayer and mplayer2

@@ -63,17 +63,28 @@ return {
 			}
 			vim.lsp.enable("lua_ls")
 
-            -- Optional: Only required if you need to update the language server settings
-            vim.lsp.config('ty', {
-              settings = {
-                ty = {
-                  -- ty language server settings go here
-                }
-              }
-            })
-
-            -- Required: Enable the language server
-            vim.lsp.enable('ty')
+			-- ty (Astral Python type checker / language server)
+			vim.lsp.config("ty", {
+				capabilities = capabilities,
+				init_options = {
+					-- static settings; changing them requires a restart
+					logLevel = "info", -- "trace" | "debug" | "info" | "warn" | "error"
+					-- logFile = "/path/to/ty.log",
+				},
+				settings = {
+					ty = {
+						diagnosticMode = "workspace", -- "off" | "workspace" | "openFilesOnly"
+						inlayHints = {
+							variableTypes = true,
+							callArgumentNames = true,
+						},
+						completions = {
+							completeFunctionParentheses = true,
+						},
+					},
+				},
+			})
+			vim.lsp.enable("ty")
 
 			-- zls
 			vim.lsp.config.zls = {
