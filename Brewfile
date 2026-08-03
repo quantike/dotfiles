@@ -44,6 +44,8 @@ brew "gstreamer"
 brew "helm"
 # Improved top (interactive process viewer)
 brew "htop"
+# Review-first terminal diff viewer for agent-authored changesets
+brew "hunk"
 # Command-line benchmarking tool
 brew "hyperfine"
 # Lightweight and flexible command-line JSON processor
@@ -110,8 +112,6 @@ brew "zola"
 brew "zsh-autosuggestions"
 # Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
-# Desktop-inspired terminal diff viewer for agent-authored changesets
-brew "modem-dev/tap/hunk", trusted: true
 # Command-line interface for 1Password
 cask "1password-cli"
 # Compact TeX distribution as alternative to the full TeX Live / MacTeX
