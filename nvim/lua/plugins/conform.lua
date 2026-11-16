@@ -7,7 +7,7 @@ return {
 				python = { "isort", "ruff" },
 				rust = { "rustfmt" },
 				json = { "prettier" },
-				markdown = { "prettier" },
+				markdown = { "prettier_markdown" },
 				sql = function(bufnr)
 					local name = vim.api.nvim_buf_get_name(bufnr)
 					-- DuckDB spawns editor buffers named duckdb.edit.NUMBER.sql via \e
@@ -18,6 +18,17 @@ return {
 				end,
 			},
 			formatters = {
+				prettier_markdown = {
+					command = "prettier",
+					args = {
+						"--stdin-filepath",
+						"$FILENAME",
+						"--print-width",
+						"120",
+						"--prose-wrap",
+						"always",
+					},
+				},
 				sqlfluff_postgres = {
 					command = "sqlfluff",
 					args = { "format", "--dialect", "postgres", "-" },

@@ -110,15 +110,12 @@ source $ZSH/oh-my-zsh.sh
 . "$HOME/.atuin/bin/env"
 eval "$(atuin init zsh)"
 
-# Jupyter 
+# Jupyter
 export PATH="$PATH:~/.local/bin"
 
-# Deno 
+# Deno
 export PATH="$HOME/.local/bin:$PATH"
 export DENO_INSTALL="$HOME/.deno"
-
-# Node
-export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
 
 # Nice syntax highlighting, QOL
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -126,7 +123,7 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Not totally sure?
 export PATH="$HOME/.cargo/bin:$PATH"
 
-# Kitty-specific 
+# Kitty-specific
 # For gnuplot support
 function iplot {
     cat <<EOF | gnuplot
@@ -175,16 +172,15 @@ export FZF_DEFAULT_OPTS='
   --color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598,marker:#fe8019,header:#665c54
 '
 
-
-# usage: 
+# usage:
 #   profile             -> switch profile and login via SSO
 #   profile --no-login  -> switch profile only
-#           -n 
+#           -n
 
 # prompt: show current AWS env_name in the left prompt when a profile with one is active
 function aws_env_prompt {
-  [[ -z "$ENV_NAME" ]] && return
-  echo " as ${hotpink}${ENV_NAME}%{$reset_color%}"
+    [[ -z "$ENV_NAME" ]] && return
+    echo " as ${hotpink}${ENV_NAME}%{$reset_color%}"
 }
 
 PROMPT='${purple}%n%{$reset_color%} in ${limegreen}%~%{$reset_color%}$(virtualenv_prompt_info)$(ruby_prompt_info)$(aws_env_prompt)$vcs_info_msg_0_${orange} λ%{$reset_color%} '
@@ -193,7 +189,7 @@ PROMPT='${purple}%n%{$reset_color%} in ${limegreen}%~%{$reset_color%}$(virtualen
 alias activate="source .venv/bin/activate"
 
 # opencode
-export PATH=/Users/ike/.opencode/bin:$PATH
+alias oc="opencode"
 
 # zoxide
 eval "$(zoxide init zsh)"
@@ -204,10 +200,10 @@ export PATH='/Users/ike/.duckdb/cli/latest':$PATH
 # postgresql
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 
-# terraform -> tf 
+# terraform -> tf
 alias tf='terraform'
 
-# nvim -> vim 
+# nvim -> vim
 alias vim='nvim'
 
 # stop typing 'clear' please
@@ -217,7 +213,7 @@ clear() {
 }
 
 httpcat() {
-  kitten icat "https://http.cat/$1.jpg"
+    kitten icat "https://http.cat/$1.jpg"
 }
 
 # bun completions
@@ -226,3 +222,13 @@ httpcat() {
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# OpenCode tools
+export OPENCODE_ENABLE_EXA=1
+export OPENCODE_EXPERIMENTAL_LSP_TOOL=true
+
+# CF CLI completions
+[[ -f "/Users/ike/.config/cf/completions/_cf.zsh" ]] && source "/Users/ike/.config/cf/completions/_cf.zsh"
+
+# perfect
+export PATH=/Users/ike/.perfect/bin:$PATH
