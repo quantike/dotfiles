@@ -1,0 +1,11 @@
+# Machine-local state written by opencode (service.json holds a remote password)
+service.json
+cli.json
+auth.json
+node_modules/
+package.json
+bun.lock
+
+# Derived skills, managed by `npx skills add ...`
+skills/*
+!skills/rust-review/

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "lsp": true,
+  "policies": [
+    { "action": "provider.use", "resource": "github-copilot", "effect": "deny" }
+  ],
+  "disabled_providers": ["github-copilot"],
+  "permissions": [
+    { "action": "lsp", "resource": "*", "effect": "allow" },
+    { "action": "websearch", "resource": "*", "effect": "allow" }
+  ],
+  "mcp": {
+    "servers": {
+      "datadog": {
+        "type": "remote",
+        "url": "https://mcp.us5.datadoghq.com/v1/mcp",
+        "disabled": false
+      },
+      "browse": {
+        "type": "local",
+        "command": [
+          "/Users/ike/.local/bin/browse",
+          "mcp"
+        ],
+        "environment": {
+          "OPENCODE_BROWSER_RUNTIME": "auto-update"
+        }
+      },
+      "linear-project": {
+        "type": "remote",
+        "url": "https://mcp.linear.app/mcp"
+      }
+    }
+  },
+  "websearch": {
+    "provider": "random"
+  }
+}
