@@ -34,5 +34,8 @@
   },
   "websearch": {
     "provider": "random"
+  },
+  "experimental": {
+    "background_compaction": true
   }
 }

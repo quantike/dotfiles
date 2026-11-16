@@ -76,8 +76,11 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# Load local secrets (not tracked in dotfiles), e.g. GITHUB_TOKEN for Yarn/GitHub Packages
-[ -f "$HOME/.secrets/github.env" ] && source "$HOME/.secrets/github.env"
+# Local secrets (not tracked in dotfiles). Sourcing github.env here exported one
+# account's GITHUB_TOKEN into every shell, which overrides gh's own stored
+# credentials and blocks `gh auth switch`. Source it per project in .envrc instead:
+#   source ~/.secrets/github.env
+# [ -f "$HOME/.secrets/github.env" ] && source "$HOME/.secrets/github.env"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
