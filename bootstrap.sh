@@ -30,7 +30,7 @@ if [ -x "/opt/homebrew/bin/brew" ]; then
 elif [ -x "/usr/local/bin/brew" ]; then
 	BREW_BIN="/usr/local/bin/brew"
 else
-	echo "‼️ Error: Homebrew binary not found after install."
+	echo "‼️ Error: Homebrew binary not found after install."
 	exit 1
 fi
 
@@ -44,7 +44,50 @@ eval "$($BREW_BIN shellenv)"
 echo "→ Homebrew is at: $BREW_BIN"
 echo "→ Testing: $(which brew)"
 
-# Symlinks the .zshrc to the .dotfiles
+# The repo remote uses an SSH host alias, so pushes need an ~/.ssh/config entry
+if ! grep -q "Host github-quantike" "$HOME/.ssh/config" 2>/dev/null; then
+	echo "⚠️  No 'github-quantike' host in ~/.ssh/config; git push will fail until you add:"
+	echo '   Host github-quantike'
+	echo '       HostName github.com'
+	echo '       User git'
+	echo '       IdentityFile ~/.ssh/<your-key>'
+fi
+
+# Symlink the git config into place and pick a per-machine identity.
+# Preselect with DOTFILES_IDENTITY=work|personal for unattended runs.
+DOTFILES_GIT="$HOME/.dotfiles/.gitconfig"
+TARGET_GIT="$HOME/.gitconfig"
+
+if [ -e "$TARGET_GIT" ] && [ ! -L "$TARGET_GIT" ]; then
+	echo "→ Backing up existing ~/.gitconfig to ~/.gitconfig.backup"
+	mv "$TARGET_GIT" "$HOME/.gitconfig.backup"
+fi
+
+echo "→ Creating symlink: $TARGET_GIT → $DOTFILES_GIT"
+ln -fs "$DOTFILES_GIT" "$TARGET_GIT"
+
+IDENTITY="${DOTFILES_IDENTITY:-}"
+if [ -z "$IDENTITY" ]; then
+	read -r -p "→ Which git identity for this machine? [work/personal] " IDENTITY
+fi
+case "$IDENTITY" in
+work | personal) ;;
+*)
+	echo "‼️ Identity must be 'work' or 'personal' (got: $IDENTITY)."
+	exit 1
+	;;
+esac
+
+IDENTITY_TARGET="$HOME/.gitconfig.identity"
+if [ -e "$IDENTITY_TARGET" ] && [ ! -L "$IDENTITY_TARGET" ]; then
+	echo "→ Backing up existing ~/.gitconfig.identity to ~/.gitconfig.identity.backup"
+	mv "$IDENTITY_TARGET" "$HOME/.gitconfig.identity.backup"
+fi
+
+echo "→ Creating symlink: $IDENTITY_TARGET → gitconfig-$IDENTITY"
+ln -fs "$HOME/.dotfiles/gitconfig-$IDENTITY" "$IDENTITY_TARGET"
+
+# Symlink the .zshrc to the .dotfiles
 DOTFILES_ZSH="$HOME/.dotfiles/.zshrc"
 TARGET_ZSH="$HOME/.zshrc"
 
@@ -56,12 +99,42 @@ fi
 echo "→ Creating symlink: $TARGET_ZSH → $DOTFILES_ZSH"
 ln -fs "$DOTFILES_ZSH" "$TARGET_ZSH"
 
+# Symlink the tmux config to the .dotfiles
+DOTFILES_TMUX="$HOME/.dotfiles/tmux.conf"
+TARGET_TMUX="$HOME/.tmux.conf"
+
+if [ -e "$TARGET_TMUX" ] && [ ! -L "$TARGET_TMUX" ]; then
+	echo "→ Backing up existing ~/.tmux.conf to ~/.tmux.conf.backup"
+	mv "$TARGET_TMUX" "$HOME/.tmux.conf.backup"
+fi
+
+echo "→ Creating symlink: $TARGET_TMUX → $DOTFILES_TMUX"
+ln -fs "$DOTFILES_TMUX" "$TARGET_TMUX"
+
 # Symlink ZSH custom files into $ZSH_CUSTOM
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 for f in "$HOME/.dotfiles/zsh/"*.zsh; do
 	target="$ZSH_CUSTOM/$(basename "$f")"
 	echo "→ Creating symlink: $target → $f"
 	ln -fs "$f" "$target"
+done
+
+# Symlink every tracked app config dir into ~/.config
+CONFIG_DIRS=(atuin bottom direnv ghostty htop k9s neofetch nvim thefuck opencode)
+mkdir -p "$HOME/.config"
+for dir in "${CONFIG_DIRS[@]}"; do
+	source="$HOME/.dotfiles/$dir"
+	target="$HOME/.config/$dir"
+	if [ ! -d "$source" ]; then
+		echo "⚠️  Missing $source, skipping."
+		continue
+	fi
+	if [ -e "$target" ] && [ ! -L "$target" ]; then
+		echo "→ Backing up existing ~/.config/$dir to ~/.config/$dir.backup"
+		mv "$target" "$target.backup"
+	fi
+	echo "→ Creating symlink: $target → $source"
+	ln -fsn "$source" "$target"
 done
 
 # Update Homebrew recipes
@@ -76,16 +149,6 @@ if [ -f "$BREWFILE" ]; then
 else
 	echo "⚠️  Warning: No Brewfile found at $BREWFILE. Skipping brew bundle."
 fi
-
-# Symlink ~/.config/k9s to dotfiles
-K9S_TARGET="$HOME/.config/k9s"
-K9S_SOURCE="$HOME/.dotfiles/k9s"
-if [ -e "$K9S_TARGET" ] && [ ! -L "$K9S_TARGET" ]; then
-	echo "→ Backing up existing ~/.config/k9s to ~/.config/k9s.backup"
-	mv "$K9S_TARGET" "$K9S_TARGET.backup"
-fi
-echo "→ Creating symlink: $K9S_TARGET → $K9S_SOURCE"
-ln -fsn "$K9S_SOURCE" "$K9S_TARGET"
 
 # Create a projects directories
 echo "→ Ensuring ~/Developer exists…"
