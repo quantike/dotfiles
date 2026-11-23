@@ -8,10 +8,14 @@ tap "s2-streamstore/s2"
 tap "seatedro/glimpse"
 # Static checker for GitHub Actions workflow files
 brew "actionlint"
+# Bourne-Again SHell, a UNIX command interpreter
+brew "bash"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Yet another cross-platform graphical process/system monitor
 brew "bottom"
+# Next-generation test runner for Rust
+brew "cargo-nextest"
 # Programming language designed for robustness, optimality, and clarity
 brew "zig"
 # Compile Cargo project with zig as linker
@@ -76,6 +80,10 @@ brew "k9s"
 brew "libmagic"
 # Package manager for the Lua programming language
 brew "luarocks"
+# Mac App Store command-line interface
+brew "mas"
+# Small build system for use with gyp or CMake
+brew "ninja"
 # Fast and user friendly build system
 brew "meson"
 # Sign files & verify signatures. Works with signify in OpenBSD
@@ -128,6 +136,8 @@ brew "websocat"
 brew "wget"
 # HTTP benchmarking tool
 brew "wrk"
+# Generate your Xcode project from a spec file and your folder structure
+brew "xcodegen"
 # Fast static site generator in a single binary with everything built-in
 brew "zola"
 # Fish-like fast/unobtrusive autosuggestions for zsh
@@ -162,12 +172,20 @@ cask "opencode-desktop"
 cask "orbstack"
 # Plugin for AWS CLI to start and end sessions that connect to managed instances
 cask "session-manager-plugin"
+mas "Developer", id: 640199958
+mas "GarageBand", id: 682658836
+mas "iMovie", id: 408981434
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "Xcode", id: 497799835
 go "github.com/google/yamlfmt/cmd/yamlfmt"
 cargo "bottom"
 cargo "cargo-audit"
 cargo "cargo-deny"
 cargo "cargo-machete"
 cargo "cargo-msrv"
+cargo "cargo-nextest"
 cargo "cargo-tarpaulin"
 cargo "cargo-udeps"
 cargo "cdl"
