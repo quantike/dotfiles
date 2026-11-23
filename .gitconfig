@@ -41,3 +41,5 @@
 # gitconfig-personal. Kept last so identity settings load after everything else.
 [include]
 	path = ~/.gitconfig.identity
+[safe]
+	directory = /Users/ike/.runner-work/perfect/perfect
