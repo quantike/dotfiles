@@ -1,5 +1,9 @@
 # AGENTS.md
 
+## Precedence
+
+- Where a project's AGENTS.md conflicts with these rules, the project rules win in that repo.
+
 ## Communication
 
 - State findings and recommendations directly. No flattery, filler, or hedging. When uncertain, name exactly what you do not know.
@@ -31,3 +35,9 @@
 
 - Never add a `Co-Authored-By` trailer or any AI or tool attribution to commits, PRs, issues, or code. A commit is attributed to its author alone.
 - Never add a trailer the user did not ask for.
+
+## Skill routing
+
+- Rules live in AGENTS.md; skills encode procedures and cite the rules.
+- Before opening a PR: run say-less on the diff, prove-it on the tests, then apply the unslop rules to the description.
+- After the same correction lands twice: run correct instead of re-explaining the rule.

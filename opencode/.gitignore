@@ -9,3 +9,7 @@ bun.lock
 # Derived skills, managed by `npx skills add ...`
 skills/*
 !skills/rust-review/
+!skills/say-less/
+!skills/prove-it/
+!skills/correct/
+!skills/unslop/
